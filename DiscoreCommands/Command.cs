@@ -5,7 +5,7 @@ using Discore.WebSocket;
 
 namespace DiscoreCommands
 {
-    abstract class Command
+    public abstract class Command
     {
         public string Name { get; set; }
         public string Desc { get; set; }

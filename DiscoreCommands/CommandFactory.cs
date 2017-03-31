@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace DiscoreCommands
 {
-    class CommandFactory
+    public class CommandFactory
     {
         private static Dictionary<string, Command> _commands = new Dictionary<string, Command>();
 

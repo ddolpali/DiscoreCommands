@@ -18,10 +18,7 @@ namespace DiscoreCommands
             Regex pattern = new Regex("([\"'])(?:(?=(\\\\?))\\2.)*?\\1|([^\\s]+)");
             var args = pattern.Matches(body);
 
-            Shard shard = e.Shard;
-            DiscordMessage message = e.Message;
-            ITextChannel textChannel = (ITextChannel)shard.Cache.Channels.Get(message.ChannelId);
-            string cmd = args[0].Value.Substring(1, args[0].Value.Length - 1);
+            string cmd = args[0].Value.Substring(1, args[0].Value.Length - 1).ToLower();
 
             CommandFactory.ExecuteCommand(cmd, args, e);
         }
