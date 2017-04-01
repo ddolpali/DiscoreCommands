@@ -12,7 +12,7 @@ namespace DiscoreCommands
         public static void ProcessCommand(object sender, MessageEventArgs e)
         {
             string body = e.Message.Content;
-            if (!body.StartsWith(_prefix))
+            if (!body.StartsWith(_prefix) || e.Shard.User.Id == e.Message.Author.Id)
                 return;
 
             Regex pattern = new Regex("([\"'])(?:(?=(\\\\?))\\2.)*?\\1|([^\\s]+)");
