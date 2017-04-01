@@ -2,10 +2,11 @@
 Very basic command handler for the Discore library. There is probably a better way of doing things; this was just something put together for my bot project.
 
 ## TODO
-* Put everything to lower case so that case doesn't matter
 * Add a Command Builder
 
 ## Example Usage
+The prefix is ! by default. You can change it by doing `CommandParser.SetPrefix(".")`
+
 Program.cs
 ```csharp
 using System;
@@ -30,10 +31,10 @@ namespace ExampleBot
             Shard shard = app.ShardManager.CreateSingleShard();
             await shard.StartAsync(CancellationToken.None);
 
-            shard.Gateway.OnMessageCreated += DiscoreCommands.CommandParser.ProcessCommand;
+            shard.Gateway.OnMessageCreated += CommandParser.ProcessCommand;
 
             // Commands
-            DiscoreCommands.CommandFactory.RegisterCommand("ping", new PingCommand());
+            CommandFactory.RegisterCommand("ping", new PingCommand());
 
             while (shard.IsRunning)
                 await Task.Delay(1000);
@@ -44,9 +45,10 @@ namespace ExampleBot
 
 Commands/Implementation/PingBot.cs
 ```csharp
+using System.Text.RegularExpressions;
 using Discore;
 using Discore.WebSocket;
-using System.Text.RegularExpressions;
+using DiscoreCommands;
 
 namespace ExampleBot.Commands.Implementation
 {
